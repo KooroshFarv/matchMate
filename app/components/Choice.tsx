@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 import UploadBox from "./upload/UploadBox"
 import StyleSelector from "./upload/StyleSelector"
 
-const ChoicePage = () => {
+const ChoicePage = ({setMode} : { setMode : (value : 'design' | 'match') => void}) => {
     const [choice, setChoice] = useState<'design' | 'match' | null>(null)
     const [imageUrl, setImageUrl] = useState<string | null>(null)
     const [submitted, setSubmitted] = useState(false)
