@@ -15,6 +15,7 @@ export default function Home() {
   })
   const [imageUrl, setImageUrl] = useState<string | null>(null)
   const [submitted, setSubmitted] = useState(false)
+  const [mode, setMode] = useState<'Design' | 'match' | null>(null)
 
   
 
@@ -25,7 +26,7 @@ export default function Home() {
   <div className="w-full max-w-md mt-40">
     <UploadBox onUpload={setImageUrl} resultUrl={submitted ? "/mock-ai-output.jpg" : null} isSubmitted={submitted}/>
   </div>
-  <div className="w-full max-w-md mt-[400px]">
+  <div className="w-full max-w-md mt-80">
     <StyleSelector onChange={setSelection} imageUrl={imageUrl} setSubmitted={setSubmitted} />
   </div>
 </div>
