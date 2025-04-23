@@ -2,6 +2,8 @@
 import { useState, useRef } from "react"
 import axios from "axios"
 import { Spinner } from "../ui/Spinner"
+import { X } from "lucide-react"
+
 
 const CLOUDINARY_UPLOAD_PRESET = "matchmate_example"
 const CLOUDINARY_CLOUD_NAME = "da0wbsjhp"
@@ -50,15 +52,32 @@ const UploadBox = () => {
     onDrop={handleDrop}
     onClick={() => inputRef.current?.click()}
     >
-        {loading ? (
-        <Spinner className="w-6 h-6 text-gray-500 animate-spin" />
+        {previewUrl ? (
+            <div className="relative w-full h-full">
+            <button
+              onClick={() => setPreviewUrl(null)}
+              className="absolute top-2 right-2  text-gray-600 p-1 cursor-pointer"
+            >
+              <X />
+            </button>
+            <img
+                src={previewUrl}
+                alt="Uploaded preview"
+                className="object-cover w-full h-full rounded-lg"
+                />
+            </div>
+            ) : loading ?(
 
-        ) :previewUrl ? (
-            <img src={previewUrl} alt="Uploaded preview" className="object-cover w-full h-full rounded-lg" />
-        ) : (
-            <p>📤 Drop your room photo here<br />or click to upload</p>
-        )}
+                <Spinner className="w-6 h-6 text-gray-500 animate-spin" />
+        
+                ) :previewUrl ? (
+                    <img src={previewUrl} alt="Uploaded preview" className="object-cover w-full h-full rounded-lg" />
+                ) : (
+                    <p>📤 Drop your room photo here<br />or click to upload</p>
+                )}
+        
 
+       
 <input type="file" accept="image/*" ref={inputRef} className="hidden" onChange={handleChange}/>
 
     </div>
