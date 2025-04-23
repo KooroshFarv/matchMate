@@ -49,14 +49,16 @@ const UploadBox = () => {
     return ( 
     <div className="w-80 h-80 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-center text-gray-500 hover:bg-gray-50 transition cursor-pointer"
     onDragOver={(e) => e.preventDefault()}
-    onDrop={handleDrop}
-    onClick={() => inputRef.current?.click()}
+    onDrop={loading || previewUrl ? undefined : handleDrop }
+    onClick={() => {
+        if(!loading && !previewUrl) inputRef.current?.click()
+    }}
     >
         {previewUrl ? (
             <div className="relative w-full h-full">
             <button
               onClick={() => setPreviewUrl(null)}
-              className="absolute top-2 right-2  text-gray-600 p-1 cursor-pointer"
+              className="absolute top-2 right-2  text-gray-600 p-1 cursor-pointer hover:bg-gray-200"
             >
               <X />
             </button>
