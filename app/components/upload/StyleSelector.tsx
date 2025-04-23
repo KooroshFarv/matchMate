@@ -1,4 +1,5 @@
-import { useState } from "react"
+'use client'
+import { useState, useRef } from "react"
 import {
   Select,
   SelectContent,
@@ -7,18 +8,23 @@ import {
   SelectValue,
 } from "@/app/components/ui/select"
 import { Button } from "../ui/button"
+import { toast } from "react-toastify"
+import { motion } from "framer-motion"
 
-const StyleSelector = ({
-  onChange,
-  imageUrl,
-}: {
+type Props = {
   onChange: (data: { style: string; room: string; vibe: string }) => void
   imageUrl: string | null
-}) => {
+  setSubmitted: (value: boolean) => void
+}
+
+const StyleSelector = ({ onChange, imageUrl, setSubmitted }: Props) => {
   const [style, setStyle] = useState("")
   const [room, setRoom] = useState("")
   const [vibe, setVibe] = useState("")
   const [attempt, setAttempt] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitted, setIsSubmitted] = useState(false)
+  const previewRef = useRef<HTMLDivElement | null>(null)
 
   const isReady = imageUrl && style && room && vibe
 
@@ -28,6 +34,25 @@ const StyleSelector = ({
     setRoom(newValues.room)
     setVibe(newValues.vibe)
     onChange(newValues)
+  }
+
+  const handleSubmit = () => {
+    if (!isReady) {
+      setAttempt(true)
+      return
+    }
+
+    setIsSubmitting(true)
+    setAttempt(false)
+    toast.info("Hang tight, we’re generating your design...")
+
+    setTimeout(() => {
+      setIsSubmitting(false)
+      setIsSubmitted(true)
+      setSubmitted(true) // ✅ Trigger final image reveal
+      previewRef.current?.scrollIntoView({ behavior: "smooth" })
+      toast.success("Your design is ready")
+    }, 4000)
   }
 
   return (
@@ -89,23 +114,32 @@ const StyleSelector = ({
 
         {/* Submit Button */}
         <Button
-          onClick={() => {
-            if (!isReady) {
-              setAttempt(true)
-              return
-            }
-            console.log("Generate with", { imageUrl, style, room, vibe })
-          }}
+          disabled={isSubmitting}
+          onClick={handleSubmit}
           className={`mt-10 py-3 rounded-md transition ${
             isReady
-              ? "bg-black w-24 text-white hover:scale-105 cursor-pointer"
-              : "bg-gray-200 w-24 text-gray-500 cursor-not-allowed"
+              ? "bg-black w-32 text-white hover:scale-105 cursor-pointer"
+              : "bg-gray-200 w-32 text-gray-500 cursor-not-allowed"
           }`}
         >
-          Submit
+          {isSubmitting ? 'Generating .. ' : 'Submit'}
         </Button>
 
-        {/* Inline warning if submitted too early */}
+        {submitted && (
+          <motion.div
+            ref={previewRef}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="mt-10 p-6 border border-gray-200 rounded-lg shadow-md"
+          >
+            <p className="text-lg font-semibold mb-4">🎨 Your AI-styled room:</p>
+            <div className="w-full h-64 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center text-gray-500 text-sm">
+              This is where your generated result will appear.
+            </div>
+          </motion.div>
+        )}
+
         {attempt && !isReady && (
           <p className="text-sm text-red-500 mt-2">
             Please complete all selections and upload a photo.

@@ -14,6 +14,8 @@ export default function Home() {
     vibe : ''
   })
   const [imageUrl, setImageUrl] = useState<string | null>(null)
+  const [submitted, setSubmitted] = useState(false)
+
   
 
   return (
@@ -21,10 +23,10 @@ export default function Home() {
     <Navbar />
     <div className="flex justify-center items-start gap-32 max-w-6xl mx-auto mt-10 px-4 w-full ">
   <div className="w-full max-w-md mt-40">
-    <UploadBox onUpload={setImageUrl}/>
+    <UploadBox onUpload={setImageUrl} resultUrl={submitted ? "/mock-ai-output.jpg" : null} isSubmitted={submitted}/>
   </div>
   <div className="w-full max-w-md mt-[400px]">
-    <StyleSelector onChange={setSelection} imageUrl={imageUrl}  />
+    <StyleSelector onChange={setSelection} imageUrl={imageUrl} setSubmitted={setSubmitted} />
   </div>
 </div>
 
