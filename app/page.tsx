@@ -13,17 +13,18 @@ export default function Home() {
     room : '',
     vibe : ''
   })
+  const [imageUrl, setImageUrl] = useState<string | null>(null)
   
 
   return (
     <>
     <Navbar />
-    <div className="flex justify-center items-start gap-12 max-w-6xl mx-auto mt-10 px-4 w-full">
+    <div className="flex justify-center items-start gap-32 max-w-6xl mx-auto mt-10 px-4 w-full ">
   <div className="w-full max-w-md mt-40">
-    <UploadBox />
+    <UploadBox onUpload={setImageUrl}/>
   </div>
-  <div className="w-full max-w-md mt-56">
-    <StyleSelector onChange={setSelection} />
+  <div className="w-full max-w-md mt-[400px]">
+    <StyleSelector onChange={setSelection} imageUrl={imageUrl}  />
   </div>
 </div>
 

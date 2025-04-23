@@ -9,7 +9,7 @@ const CLOUDINARY_UPLOAD_PRESET = "matchmate_example"
 const CLOUDINARY_CLOUD_NAME = "da0wbsjhp"
 
 
-const UploadBox = () => {
+const UploadBox = ({onUpload}: {onUpload : (url : string) => void}) => {
     const [previewUrl, setPreviewUrl] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
     const inputRef = useRef<HTMLInputElement | null>(null)
@@ -26,6 +26,7 @@ const UploadBox = () => {
             formData
           ) 
           setPreviewUrl(res.data.secure_url)
+          onUpload(res.data.secure_url)
         }catch(error){
             console.error("Upload failed:", error)
         }finally{
@@ -47,7 +48,7 @@ const UploadBox = () => {
     }
 
     return ( 
-    <div className="w-80 h-80 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-center text-gray-500 hover:bg-gray-50 transition cursor-pointer"
+    <div className="w-[500px] h-[500px] border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-center text-gray-500 hover:bg-gray-50 transition cursor-pointer"
     onDragOver={(e) => e.preventDefault()}
     onDrop={loading || previewUrl ? undefined : handleDrop }
     onClick={() => {
