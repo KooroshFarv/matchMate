@@ -10,14 +10,16 @@ import {
 import { Button } from "../ui/button"
 import { toast } from "react-toastify"
 import { motion } from "framer-motion"
+import axios, { Axios } from "axios"
 
 type Props = {
   onChange: (data: { style: string; room: string; vibe: string }) => void
   imageUrl: string | null
   setSubmitted: (value: boolean) => void
+  setResultUrl : (url :string) => void
 }
 
-const StyleSelector = ({ onChange, imageUrl, setSubmitted }: Props) => {
+const StyleSelector = ({ onChange, imageUrl, setSubmitted , setResultUrl}: Props) => {
   const [style, setStyle] = useState("")
   const [room, setRoom] = useState("")
   const [vibe, setVibe] = useState("")
@@ -36,7 +38,7 @@ const StyleSelector = ({ onChange, imageUrl, setSubmitted }: Props) => {
     onChange(newValues)
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     if (!isReady) {
       setAttempt(true)
       return
@@ -46,13 +48,21 @@ const StyleSelector = ({ onChange, imageUrl, setSubmitted }: Props) => {
     setAttempt(false)
     toast.info("Hang tight, we’re generating your design...")
 
-    setTimeout(() => {
+
+    const {data} = await axios.post('/api/generate',{
+      imageUrl, room, vibe
+    })
+
+    if(data?.resultUrl){
       setIsSubmitting(false)
+      setSubmitted(true)
+      setResultUrl(data.resultUrl)
       setIsSubmitted(true)
-      setSubmitted(true) // ✅ Trigger final image reveal
-      previewRef.current?.scrollIntoView({ behavior: "smooth" })
-      toast.success("Your design is ready")
-    }, 4000)
+      previewRef.current?.scrollIntoView({behavior: 'smooth'})
+      toast.success('Your Design is Ready !')
+    }else{
+      toast.error('Something went wrong :( ')
+    }
   }
 
   return (

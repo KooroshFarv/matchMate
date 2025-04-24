@@ -14,6 +14,7 @@ export default function Home() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [mode, setMode] = useState<'design' | 'match' | null>(null); 
+  const [resultUrl , setResultUrl] = useState<string | null>(null)
 
   return (
     <>
@@ -25,7 +26,7 @@ export default function Home() {
           <div className="w-full max-w-md mt-40">
             <UploadBox
               onUpload={setImageUrl}
-              resultUrl={submitted ? "/mock-ai-output.jpg" : null}
+              resultUrl={resultUrl}
               isSubmitted={submitted}
             />
           </div>
@@ -34,6 +35,7 @@ export default function Home() {
               onChange={setSelection}
               imageUrl={imageUrl}
               setSubmitted={setSubmitted}
+              setResultUrl={setResultUrl}
             />
           </div>
         </div>
