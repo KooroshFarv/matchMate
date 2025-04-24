@@ -21,7 +21,7 @@ export default function Home() {
       {!mode && <ChoicePage setMode={setMode} />}
       
       {mode === 'design' && (
-        <div className="flex justify-center items-start gap-32 max-w-6xl mx-auto mt-10 px-4 w-full">
+        <div className="flex justify-center items-start gap-32 max-w-6xl mx-auto px-4 w-full">
           <div className="w-full max-w-md mt-40">
             <UploadBox
               onUpload={setImageUrl}
@@ -29,7 +29,7 @@ export default function Home() {
               isSubmitted={submitted}
             />
           </div>
-          <div className="w-full max-w-md  ">
+          <div className="w-full max-w-md ">
             <StyleSelector
               onChange={setSelection}
               imageUrl={imageUrl}

@@ -57,7 +57,7 @@ const StyleSelector = ({ onChange, imageUrl, setSubmitted }: Props) => {
 
   return (
     <>
-        <div className="w-full max-w-md mt-56 ml-10">
+        <div className="w-full max-w-md mt-64 ml-10 space-y-4">
         {/* Style */}
         <div>
           <label className="mb-1 block">Style</label>

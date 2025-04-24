@@ -26,8 +26,8 @@ const ChoicePage = ({setMode} : { setMode : (value : 'design' | 'match') => void
                        >
                     <h1 className="text-3xl font-semibold mb-8">What do yo you like to do today ?</h1>
                     <div className="flex gap-4 justify-center">
-                    <Button onClick={() => setChoice("design")}>🛋 Style my room</Button>
-                    <Button onClick={() => setChoice("match")}>🧩 Match this item</Button>
+                    <Button onClick={() => setChoice("design")} className="cursor-pointer"> Style my room</Button>
+                    <Button onClick={() => setChoice("match")} className="cursor-pointer"> Match this item</Button>
                     </div>
                     </motion.div>
                     )}

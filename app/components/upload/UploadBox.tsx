@@ -55,7 +55,9 @@ const UploadBox = ({ onUpload, resultUrl, isSubmitted }: UploadBoxProps) => {
 
   return (
     <div
-      className="relative w-[500px] h-[500px] border-2 border-dashed border-gray-300 rounded-lg overflow-hidden flex items-center justify-center text-center text-gray-500 hover:bg-gray-50 transition cursor-pointer"
+      className="relative w-[500px] h-[500px] border-2
+       border-dashed border-gray-300 rounded-lg overflow-hidden mt-20
+       flex items-center justify-center text-center text-gray-500 hover:bg-gray-50 transition cursor-pointer"
       onDragOver={(e) => e.preventDefault()}
       onDrop={!isLocked && !loading ? handleDrop : undefined}
       onClick={() => {
