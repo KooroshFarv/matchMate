@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      {!mode && <ChoicePage setMode={setMode} />}
+      {!mode && <ChoicePage setMode={setMode}  setResultUrl={setResultUrl}/>}
       
       {mode === 'design' && (
         <div className="flex justify-center items-start gap-32 max-w-6xl mx-auto px-4 w-full">

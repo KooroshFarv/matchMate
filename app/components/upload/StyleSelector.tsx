@@ -10,7 +10,8 @@ import {
 import { Button } from "../ui/button"
 import { toast } from "react-toastify"
 import { motion } from "framer-motion"
-import axios, { Axios } from "axios"
+import axios from "axios"
+
 
 type Props = {
   onChange: (data: { style: string; room: string; vibe: string }) => void
@@ -28,15 +29,28 @@ const StyleSelector = ({ onChange, imageUrl, setSubmitted , setResultUrl}: Props
   const [submitted, setIsSubmitted] = useState(false)
   const previewRef = useRef<HTMLDivElement | null>(null)
 
+  console.log("setResultUrl", typeof setResultUrl);
+
   const isReady = imageUrl && style && room && vibe
 
-  const handleUpdates = (key: string, value: string) => {
-    const newValues = { style, room, vibe, [key]: value }
-    setStyle(newValues.style)
-    setRoom(newValues.room)
-    setVibe(newValues.vibe)
-    onChange(newValues)
+  type SelectionKey = 'style' | 'room' | 'vibe'
+
+const handleUpdates = (key: SelectionKey, value: string) => {
+  const updated = {
+    style,
+    room,
+    vibe,
+    [key]: value,
   }
+
+  if (key === "style") setStyle(value)
+  if (key === "room") setRoom(value)
+  if (key === "vibe") setVibe(value)
+
+  onChange(updated)
+}
+
+  
 
   const handleSubmit = async() => {
     if (!isReady) {
@@ -50,7 +64,7 @@ const StyleSelector = ({ onChange, imageUrl, setSubmitted , setResultUrl}: Props
 
 
     const {data} = await axios.post('/api/generate',{
-      imageUrl, room, vibe
+      imageUrl, room, vibe, style
     })
 
     if(data?.resultUrl){

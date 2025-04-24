@@ -4,27 +4,33 @@ export async function POST(req: Request) {
   try {
     const body = await req.json()
     const { imageUrl, style, room, vibe } = body
+    
+    console.log("Incoming POST body:", { imageUrl, style, room, vibe })
+
+    if(!room || !style || !vibe || !imageUrl){
+        return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    }
 
     const replicateResponse = await fetch("https://api.replicate.com/v1/predictions", {
       method: "POST",
       headers: {
         Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
-        "Content-Type": "application/json", 
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        version: "6b5e34ebadd450169fe8c3f6dfc1d41a8df1b95c2304891513c5e85b7e10bfc4",
-        input: {
+        version: "76604baddc85b1b4616e1c6475eca080da339c8875bd4996705440484a6eac38",
+          input: {
           image: imageUrl,
-          room_type: room,
-          style,
-          vibe,
+         prompt : `A ${vibe.toLowerCase()} ${style.toLowerCase()} ${room.toLowerCase()}`
         },
       }),
     })
 
     const replicateData = await replicateResponse.json()
+   
 
     if (replicateData.error) {
+      console.error("Replicate Error:", replicateData.error)
       return NextResponse.json({ error: replicateData.error }, { status: 500 })
     }
 
@@ -35,7 +41,6 @@ export async function POST(req: Request) {
 
     let outputUrl = null
 
-    // Poll until prediction is done
     while (!outputUrl) {
       const pollRes = await fetch(predictionUrl, {
         headers: {
