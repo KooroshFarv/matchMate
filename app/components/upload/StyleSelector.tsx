@@ -81,7 +81,7 @@ const StyleSelector = ({
       setIsSubmitted(true)
       setAfter(true) 
       previewRef.current?.scrollIntoView({ behavior: "smooth" })
-      toast.success("Your Design is Ready!")
+      // toast.success("Your Design is Ready!")
     } else {
       toast.error("Something went wrong :(")
     }
@@ -153,6 +153,9 @@ const StyleSelector = ({
             : "bg-gray-200 w-32 text-gray-500 cursor-not-allowed"
         }`}
       >
+          {isSubmitting && (
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+          )}
         {isSubmitting ? "Generating..." : "Submit"}
       </Button>
 
@@ -165,6 +168,13 @@ const StyleSelector = ({
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="mt-10 p-6 border border-gray-200 rounded-lg absolute left-24 bottom-20 shadow-md"
         >
+
+        {isSubmitting && (
+          <div className="absolute inset-0 bg-white/70 flex items-center justify-center z-20">
+          <div className="w-8 h-8 border-4 border-gray-300 border-t-black rounded-full animate-spin"></div>
+        </div>
+        )}
+
       <div className="w-[500px] h-[500px] flex items-center justify-center overflow-hidden rounded-lg">
 
             {(after ? resultUrl : imageUrl) &&(
@@ -172,6 +182,7 @@ const StyleSelector = ({
           src={after ? resultUrl! : imageUrl!}
           alt="Generated design"
           className="object-contain max-w-full max-h-full"
+          
           />
         )}
         </div>
