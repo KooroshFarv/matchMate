@@ -19,29 +19,33 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      {!mode && <ChoicePage setMode={setMode}  setResultUrl={setResultUrl} resultUrl={resultUrl}/>}
+      {/* {!mode && <ChoicePage setMode={setMode}  setResultUrl={setResultUrl} resultUrl={resultUrl}/>} */}
+      {!mode && <ChoicePage setMode={setMode}/>}
       
       {mode === 'design' && (
-        <div className="flex justify-center items-start gap-32 max-w-6xl mx-auto px-4 w-full">
-          <div className="w-full max-w-md mt-40">
-            <UploadBox
-            key={resultUrl}
-              onUpload={setImageUrl}
-              resultUrl={resultUrl}
-              isSubmitted={submitted}
-            />
-          </div>
-          <div className="w-full max-w-md ">
-            <StyleSelector
-              onChange={setSelection}
-              imageUrl={imageUrl}
-              setSubmitted={setSubmitted}
-              setResultUrl={setResultUrl}
-              resultUrl={resultUrl}
-            />
-          </div>
-        </div>
+  <div className="flex justify-center items-start gap-32 max-w-6xl mx-auto px-4 w-full">
+    <div className="w-full max-w-md mt-40">
+      {!submitted && !resultUrl && (
+        <UploadBox
+          onUpload={setImageUrl}
+          resultUrl={resultUrl}
+          isSubmitted={submitted}
+        />
       )}
+    </div>
+    <div className="w-full max-w-md">
+      <StyleSelector
+        onChange={setSelection}
+        imageUrl={imageUrl}
+        setSubmitted={setSubmitted}
+        setResultUrl={setResultUrl}
+        resultUrl={resultUrl}
+        onChangeImage={setImageUrl}
+      />
+    </div>
+  </div>
+)}
+
     </>
   );
 }

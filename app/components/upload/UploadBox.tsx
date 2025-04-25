@@ -5,7 +5,6 @@ import axios from "axios"
 import { Spinner } from "../ui/Spinner"
 import { X } from "lucide-react"
 import { AnimatePresence, motion } from "framer-motion"
-import { Button } from "../ui/button"
 
 const CLOUDINARY_UPLOAD_PRESET = "matchmate_example"
 const CLOUDINARY_CLOUD_NAME = "da0wbsjhp"
@@ -19,11 +18,9 @@ type UploadBoxProps = {
 const UploadBox = ({ onUpload, resultUrl, isSubmitted }: UploadBoxProps) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
-  const [after, setAfter] = useState(true)
   const inputRef = useRef<HTMLInputElement | null>(null)
-  const previewRef = useRef<HTMLDivElement | null>(null)
 
-  const displayUrl = !isSubmitted ? previewUrl : null;
+  const displayUrl = !isSubmitted ? previewUrl : null
   const isLocked = isSubmitted && !!resultUrl
 
   const handleUpload = async (file: File) => {
@@ -59,28 +56,25 @@ const UploadBox = ({ onUpload, resultUrl, isSubmitted }: UploadBoxProps) => {
 
   useEffect(() => {
     if (resultUrl && isSubmitted) {
-      setAfter(true)
       setPreviewUrl(null)
     }
   }, [resultUrl, isSubmitted])
 
   return (
-    
     <div
-    className={`relative w-[500px] h-[500px] 
-      rounded-lg overflow-hidden mt-20
-      flex items-center justify-center text-center text-gray-500 cursor-pointer
-      ${previewUrl || (isSubmitted && resultUrl) ? 'border-none' : 'border-2 border-dashed border-gray-300'}
-    `}
-    onDragOver={(e) => e.preventDefault()}
-    onDrop={!isLocked && !loading ? handleDrop : undefined}
-    onClick={() => {
-      if (!loading && !isLocked) inputRef.current?.click()
-    }}
-  >
-  
+      className={`relative w-[500px] h-[500px] 
+        rounded-lg overflow-hidden mt-20
+        flex items-center justify-center text-center text-gray-500 cursor-pointer
+        ${displayUrl || (isSubmitted && resultUrl) ? 'border-none' : 'border-2 border-dashed border-gray-300'}
+      `}
+      onDragOver={(e) => e.preventDefault()}
+      onDrop={!isLocked && !loading ? handleDrop : undefined}
+      onClick={() => {
+        if (!loading && !isLocked) inputRef.current?.click()
+      }}
+    >
       <AnimatePresence mode="wait">
-        {loading ? (
+        {loading && (
           <motion.div
             key="loading"
             initial={{ opacity: 0 }}
@@ -90,9 +84,11 @@ const UploadBox = ({ onUpload, resultUrl, isSubmitted }: UploadBoxProps) => {
           >
             <Spinner className="w-6 h-6 text-gray-500 animate-spin" />
           </motion.div>
-        ) : displayUrl ? (
+        )}
+
+        {!loading && displayUrl && (
           <motion.div
-            key={displayUrl + after}
+            key={displayUrl}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
@@ -117,7 +113,9 @@ const UploadBox = ({ onUpload, resultUrl, isSubmitted }: UploadBoxProps) => {
               className="object-contain max-w-full max-h-full rounded-lg"
             />
           </motion.div>
-        ) : (
+        )}
+
+        {!loading && !displayUrl && (
           <motion.div
             key="placeholder"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -137,7 +135,6 @@ const UploadBox = ({ onUpload, resultUrl, isSubmitted }: UploadBoxProps) => {
         className="hidden"
         onChange={handleChange}
       />
-     
     </div>
   )
 }

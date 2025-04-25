@@ -12,17 +12,20 @@ import { Button } from "../ui/button"
 import { toast } from "react-toastify"
 import { motion } from "framer-motion"
 import axios from "axios"
+import { X } from "lucide-react"
 
 type Props = {
   onChange: (data: { style: string; room: string; vibe: string }) => void
   imageUrl: string | null
   setSubmitted: (value: boolean) => void
-  setResultUrl: (url: string) => void
+  setResultUrl: (url: string | null) => void
+  onChangeImage: (url: string | null) => void
   resultUrl: string | null
 }
 
 const StyleSelector = ({
   onChange,
+  onChangeImage,
   imageUrl,
   setSubmitted,
   setResultUrl,
@@ -34,7 +37,7 @@ const StyleSelector = ({
   const [attempt, setAttempt] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setIsSubmitted] = useState(false)
-  const [after, setAfter] = useState(true) // <- NEW toggle state
+  const [after, setAfter] = useState(true) 
   const previewRef = useRef<HTMLDivElement | null>(null)
 
   const isReady = imageUrl && style && room && vibe
@@ -62,7 +65,7 @@ const StyleSelector = ({
 
     setIsSubmitting(true)
     setAttempt(false)
-    toast.info("Hang tight, we’re generating your design...")
+    toast.info("Hang tight, we're generating your design...")
 
     const { data } = await axios.post("/api/generate", {
       imageUrl,
@@ -162,12 +165,16 @@ const StyleSelector = ({
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="mt-10 p-6 border border-gray-200 rounded-lg absolute left-24 bottom-20 shadow-md"
         >
-      
+      <div className="w-[500px] h-[500px] flex items-center justify-center overflow-hidden rounded-lg">
+
+            {(after ? resultUrl : imageUrl) &&(
           <img
-            src={after ? resultUrl ?? "" : imageUrl ?? ""}
-            alt="Generated design"
-            className="w-full h-auto rounded-lg shadow"
+          src={after ? resultUrl! : imageUrl!}
+          alt="Generated design"
+          className="object-contain max-w-full max-h-full"
           />
+        )}
+        </div>
 
           <Button
             className="mt-4 bg-gray-700 px-3 py-1 text-sm rounded-md shadow-md hover:bg-black transition"
@@ -175,6 +182,27 @@ const StyleSelector = ({
           >
             {after ? "Show Before" : "Show After"}
           </Button>
+                {imageUrl && resultUrl && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            setSubmitted(false)
+            setIsSubmitted(false)
+            setResultUrl(null)
+            onChangeImage(null)
+            setStyle("")
+            setRoom("")
+            setVibe("")
+            setAfter(true)
+            onChange({ style: "", room: "", vibe: "" })
+          }}
+          className="absolute top-0 right-0 text-gray-600 rounded-full p-1 hover:scale-105
+           hover:text-gray-800 cursor-pointer transition"
+        >
+          <X />
+        </button>
+)}
+
         </motion.div>
       )}
 
