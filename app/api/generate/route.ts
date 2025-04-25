@@ -4,7 +4,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json()
     const { imageUrl, style, room, vibe } = body
-    
+
     console.log("Incoming POST body:", { imageUrl, style, room, vibe })
 
     if(!room || !style || !vibe || !imageUrl){
@@ -52,6 +52,7 @@ export async function POST(req: Request) {
 
       if (pollData.status === "succeeded") {
         outputUrl = pollData.output
+        console.log("Final AI Output:", pollData.output)
       } else if (pollData.status === "failed") {
         return NextResponse.json({ error: "Generation failed" }, { status: 500 })
       }

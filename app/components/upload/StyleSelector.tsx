@@ -18,9 +18,10 @@ type Props = {
   imageUrl: string | null
   setSubmitted: (value: boolean) => void
   setResultUrl : (url :string) => void
+  resultUrl : string | null
 }
 
-const StyleSelector = ({ onChange, imageUrl, setSubmitted , setResultUrl}: Props) => {
+const StyleSelector = ({ onChange, imageUrl, setSubmitted , setResultUrl, resultUrl}: Props) => {
   const [style, setStyle] = useState("")
   const [room, setRoom] = useState("")
   const [vibe, setVibe] = useState("")
@@ -155,13 +156,14 @@ const handleUpdates = (key: SelectionKey, value: string) => {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="mt-10 p-6 border border-gray-200 rounded-lg shadow-md"
+            className="mt-10 p-6 border border-gray-200 rounded-lg absolute left-32 bottom-20 shadow-md"
           >
-            <p className="text-lg font-semibold mb-4">🎨 Your AI-styled room:</p>
-            <div className="w-full h-64 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center text-gray-500 text-sm">
-              This is where your generated result will appear.
-            </div>
-          </motion.div>
+            {resultUrl && (
+              <img src={resultUrl} alt="Generated design" className="w-full h-auto rounded-lg " />
+            )}
+            
+            </motion.div>
+            
         )}
 
         {attempt && !isReady && (

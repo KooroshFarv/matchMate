@@ -9,9 +9,10 @@ import StyleSelector from "./upload/StyleSelector"
 type ChoicePageProps = {
   setMode: (value: 'design' | 'match') => void;
   setResultUrl: (url: string) => void;
+  resultUrl : string | null
 };
 
-const ChoicePage = ({ setMode, setResultUrl }: ChoicePageProps) => {
+const ChoicePage = ({ setMode, setResultUrl, resultUrl }: ChoicePageProps) => {
   const [choice, setChoice] = useState<'design' | 'match' | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -55,6 +56,7 @@ const ChoicePage = ({ setMode, setResultUrl }: ChoicePageProps) => {
                 imageUrl={imageUrl}
                 setSubmitted={setSubmitted}
                 setResultUrl={setResultUrl}
+                resultUrl={resultUrl}
               />
             </div>
           </motion.div>
