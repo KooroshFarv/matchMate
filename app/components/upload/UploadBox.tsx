@@ -130,18 +130,6 @@ const UploadBox = ({ onUpload, resultUrl, isSubmitted }: UploadBoxProps) => {
         )}
       </AnimatePresence>
 
-      {previewUrl && resultUrl && (
-        <Button
-          className="absolute top-3 left-3 z-10 bg-white px-3 py-1 text-sm rounded-md shadow-md hover:bg-gray-100 transition"
-          onClick={(e) => {
-            e.stopPropagation()
-            setAfter((prev) => !prev)
-          }}
-        >
-          {after ? "Show Before" : "Show After"}
-        </Button>
-      )}
-
       <input
         type="file"
         accept="image/*"
