@@ -13,9 +13,10 @@ type UploadBoxProps = {
   onUpload: (url: string) => void
   resultUrl?: string | null
   isSubmitted?: boolean
+  isGenerating? : boolean 
 }
 
-const UploadBox = ({ onUpload, resultUrl, isSubmitted }: UploadBoxProps) => {
+const UploadBox = ({ onUpload, resultUrl, isSubmitted, isGenerating }: UploadBoxProps) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -68,9 +69,9 @@ const UploadBox = ({ onUpload, resultUrl, isSubmitted }: UploadBoxProps) => {
         ${displayUrl || (isSubmitted && resultUrl) ? 'border-none' : 'border-2 border-dashed border-gray-300'}
       `}
       onDragOver={(e) => e.preventDefault()}
-      onDrop={!isLocked && !loading ? handleDrop : undefined}
+      onDrop={!isLocked && !loading && !isGenerating ? handleDrop : undefined}
       onClick={() => {
-        if (!loading && !isLocked) inputRef.current?.click()
+        if (!loading && !isLocked && !isGenerating) inputRef.current?.click()
       }}
     >
       <AnimatePresence mode="wait">

@@ -13,6 +13,7 @@ export default function Home() {
   });
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [mode, setMode] = useState<'design' | 'match' | null>(null); 
   const [resultUrl , setResultUrl] = useState<string | null>(null)
 
@@ -30,6 +31,7 @@ export default function Home() {
           onUpload={setImageUrl}
           resultUrl={resultUrl}
           isSubmitted={submitted}
+          isGenerating={isSubmitting}
         />
       )}
     </div>
@@ -41,6 +43,9 @@ export default function Home() {
         setResultUrl={setResultUrl}
         resultUrl={resultUrl}
         onChangeImage={setImageUrl}
+        isSubmitting = {isSubmitting}
+        setIsSubmitting = {setIsSubmitting}
+
       />
     </div>
   </div>

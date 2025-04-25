@@ -21,6 +21,8 @@ type Props = {
   setResultUrl: (url: string | null) => void
   onChangeImage: (url: string | null) => void
   resultUrl: string | null
+  isSubmitting : boolean
+  setIsSubmitting : ( value : boolean) => void
 }
 
 const StyleSelector = ({
@@ -29,13 +31,14 @@ const StyleSelector = ({
   imageUrl,
   setSubmitted,
   setResultUrl,
+  isSubmitting,
+  setIsSubmitting,
   resultUrl,
 }: Props) => {
   const [style, setStyle] = useState("")
   const [room, setRoom] = useState("")
   const [vibe, setVibe] = useState("")
   const [attempt, setAttempt] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setIsSubmitted] = useState(false)
   const [after, setAfter] = useState(true) 
   const previewRef = useRef<HTMLDivElement | null>(null)
@@ -93,7 +96,9 @@ const StyleSelector = ({
       <div>
         <label className="mb-1 block">Style</label>
         <Select onValueChange={(value) => handleUpdates("style", value)}>
-          <SelectTrigger className="w-full h-12 rounded-md border border-gray-300 px-4 text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-black">
+          <SelectTrigger
+          disabled = {isSubmitting}
+          className="w-full h-12 rounded-md border border-gray-300 px-4 text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-black">
             <SelectValue placeholder="Choose a style" />
           </SelectTrigger>
           <SelectContent>
@@ -112,7 +117,9 @@ const StyleSelector = ({
       <div>
         <label className="mb-1 block">Room</label>
         <Select onValueChange={(value) => handleUpdates("room", value)}>
-          <SelectTrigger className="w-full h-12 rounded-md border border-gray-300 px-4 text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-black">
+          <SelectTrigger 
+          disabled = {isSubmitting}
+          className="w-full h-12 rounded-md border border-gray-300 px-4 text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-black">
             <SelectValue placeholder="Choose a room" />
           </SelectTrigger>
           <SelectContent>
@@ -129,7 +136,9 @@ const StyleSelector = ({
       <div>
         <label className="mb-1 block">Vibe</label>
         <Select onValueChange={(value) => handleUpdates("vibe", value)}>
-          <SelectTrigger className="w-full h-12 rounded-md border border-gray-300 px-4 text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-black">
+          <SelectTrigger
+          disabled = {isSubmitting}
+          className="w-full h-12 rounded-md border border-gray-300 px-4 text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-black">
             <SelectValue placeholder="Choose a vibe" />
           </SelectTrigger>
           <SelectContent>

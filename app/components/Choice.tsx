@@ -18,8 +18,8 @@ const ChoicePage = ({ setMode }: ChoicePageProps) => {
     >
       <h1 className="text-3xl font-semibold">What do you want to do today?</h1>
       <div className="flex gap-4">
-        <Button onClick={() => setMode('design')}>Style my room</Button>
-        <Button onClick={() => setMode('match')}>Match this item</Button>
+        <Button className="cursor-pointer" onClick={() => setMode('design')}>Style my room</Button>
+        <Button className="cursor-pointer" onClick={() => setMode('match')}>Match this item</Button>
       </div>
     </motion.div>
   )
