@@ -39,7 +39,7 @@ const StyleSelector = ({
   const [room, setRoom] = useState("")
   const [vibe, setVibe] = useState("")
   const [attempt, setAttempt] = useState(false)
-  const [submitted, setIsSubmitted] = useState(false)
+  const [Submitted, setIsSubmitted] = useState(false)
   const [after, setAfter] = useState(true) 
   const previewRef = useRef<HTMLDivElement | null>(null)
 
@@ -163,13 +163,14 @@ const StyleSelector = ({
         }`}
       >
           {isSubmitting && (
-            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-          )}
-        {isSubmitting ? "Generating..." : "Submit"}
+      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+    )}
+
+        {isSubmitting ? "Generating .." : Submitted ? "Generate Again" : "Submitted"}
       </Button>
 
       {/* Result Preview */}
-      {submitted && (
+      {Submitted && (
         <motion.div
           ref={previewRef}
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
