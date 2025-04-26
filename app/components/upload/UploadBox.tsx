@@ -73,7 +73,7 @@ const UploadBox = ({ onUpload, resultUrl, isSubmitted, isGenerating }: UploadBox
   return (
     <div
       className={`relative w-[500px] h-[500px] rounded-lg overflow-hidden mt-20 flex items-center justify-center text-center text-white
-         bg-gray-800 cursor-pointer ${displayUrl || (isSubmitted && resultUrl) ?
+         bg-[#011112c2] cursor-pointer ${displayUrl || (isSubmitted && resultUrl) ?
           'bg-transparent border-none' : 'border-2 border-dashed border-gray-300'}
       `}
       onDragOver={(e) => e.preventDefault()}

@@ -94,11 +94,11 @@ const StyleSelector = ({
 <div className="w-full max-w-md mt-64 ml-10 space-y-4">
   {/* Style */}
   <div>
-    <label className="mb-1 block text-white">Style</label>
+    <label className="mb-1 block text-black">Style</label>
     <Select onValueChange={(value) => handleUpdates("style", value)}>
       <SelectTrigger
         disabled={isSubmitting}
-        className="w-full h-12 rounded-md bg-[#4C7B8B] text-white px-4 text-lg text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-white data-[placeholder]:text-white data-[placeholder]:opacity-100"
+        className="w-full h-12 rounded-md bg-[#011112c2] text-white px-4 text-md text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-white data-[placeholder]:text-white data-[placeholder]:opacity-100"
         >
         <SelectValue placeholder="Choose a style" />
       </SelectTrigger>
@@ -118,11 +118,11 @@ const StyleSelector = ({
 
       {/* Room */}
       <div>
-        <label className="mb-1 block text-white">Room</label>
+        <label className="mb-1 block text-black">Room</label>
         <Select onValueChange={(value) => handleUpdates("room", value)}>
           <SelectTrigger 
           disabled = {isSubmitting}
-          className="w-full h-12 rounded-md bg-[#4C7B8B] text-white px-4 text-lg text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-white data-[placeholder]:text-white data-[placeholder]:opacity-100">
+          className="w-full h-12 rounded-md bg-[#011112c2] text-white px-4 text-md text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-white data-[placeholder]:text-white data-[placeholder]:opacity-100">
           <SelectValue placeholder="Choose a room" />
           </SelectTrigger>
           <SelectContent>
@@ -137,11 +137,11 @@ const StyleSelector = ({
 
       {/* Vibe */}
       <div>
-        <label className="mb-1 block text-white">Vibe</label>
+        <label className="mb-1 block text-black">Vibe</label>
         <Select onValueChange={(value) => handleUpdates("vibe", value)}>
           <SelectTrigger
           disabled = {isSubmitting}
-          className="w-full h-12 rounded-md bg-[#4C7B8B] text-white px-4 text-lg text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-white data-[placeholder]:text-white data-[placeholder]:opacity-100">
+          className="w-full h-12 rounded-md bg-[#011112c2] text-white px-4 text-md text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-white data-[placeholder]:text-white data-[placeholder]:opacity-100">
           <SelectValue placeholder="Choose a vibe" />
           </SelectTrigger>
           <SelectContent>
@@ -179,7 +179,7 @@ const StyleSelector = ({
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mt-10 p-6  border-gray-200 rounded-xl absolute left-44 bottom-20 bg-[#D9EAFD] shadow-2xl"
+          className="mt-10 p-6  border-gray-200 rounded-xl absolute left-44 bottom-20 bg-white shadow-2xl"
         >
 
         {isSubmitting && (
