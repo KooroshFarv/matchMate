@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from "@/app/components/ui/button"
 import {
   DropdownMenu,
@@ -5,30 +7,37 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/app/components/ui/dropdown-menu"
-
+import Link from "next/link"
 
 const Navbar = () => {
-    return ( 
-       <nav className="flex justify-between shadow-sm items-center p-4  ">
-        <h1>MatchMade</h1>
-        <div className="flex gap-10 justify-center">
-            <DropdownMenu>
-                <DropdownMenuTrigger className="cursor-pointer font-medium">
-                    Concepts
-                </DropdownMenuTrigger> 
-                <DropdownMenuContent>
-                    <DropdownMenuItem>Modern</DropdownMenuItem>
-                    <DropdownMenuItem>Minimal</DropdownMenuItem>
-                    <DropdownMenuItem>Cozy</DropdownMenuItem>
-                    <DropdownMenuItem>Industrial</DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
-            <div className="cursor-pointer font-medium hover:text-gray-800"> Inspiration </div>
-            <div className="cursor-pointer font-medium hover:text-gray-800"> Contact </div>
-        </div>
-            <Button variant='ghost' className="cursor-pointer">Sign In</Button>
-       </nav>
-     );
+  return (
+    <nav className="w-full bg-[#011112c2] text-white py-6 px-8 flex justify-between items-center border-b border-[#3F4F44]/50">
+      <h1 className="text-xl font-bold">
+         <Link href='/'>Match Mate</Link>
+         </h1>
+
+      <div className="flex gap-10 justify-center items-center">
+        <DropdownMenu>
+          <DropdownMenuTrigger className="cursor-pointer font-medium hover:text-[#DCD7C9]/80 transition">
+            Concepts
+          </DropdownMenuTrigger> 
+          <DropdownMenuContent>
+            <DropdownMenuItem>Modern</DropdownMenuItem>
+            <DropdownMenuItem>Minimal</DropdownMenuItem>
+            <DropdownMenuItem>Cozy</DropdownMenuItem>
+            <DropdownMenuItem>Industrial</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        <div className="cursor-pointer font-medium hover:text-[#DCD7C9]/80 transition">Inspiration</div>
+        <div className="cursor-pointer font-medium hover:text-[#DCD7C9]/80 transition">Contact</div>
+      </div>
+
+      <Button variant="ghost" className="text-[#DCD7C9] hover:bg-[#3F4F44]/40 transition">
+        Sign In
+      </Button>
+    </nav>
+  )
 }
- 
-export default Navbar;
+
+export default Navbar

@@ -1,9 +1,11 @@
 'use client'
+
 import Navbar from "./components/Navbar";
 import UploadBox from "./components/upload/UploadBox";
 import StyleSelector from "./components/upload/StyleSelector";
 import { useState } from "react";
 import ChoicePage from "./components/Choice";
+import Footer from "./components/Footer";
 
 export default function Home() {
   const [selection, setSelection] = useState({
@@ -18,43 +20,41 @@ export default function Home() {
   const [resultUrl , setResultUrl] = useState<string | null>(null)
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen bg-[#034C53]">
       <Navbar />
-      <div className="min-h-screen bg-[#23486A]">
-
-     
-      {/* {!mode && <ChoicePage setMode={setMode}  setResultUrl={setResultUrl} resultUrl={resultUrl}/>} */}
-      {!mode && <ChoicePage setMode={setMode}/>}
       
-      {mode === 'design' && (
-  <div className="flex justify-center items-center gap-24 max-w-6xl mx-auto px-4 w-full">
-    
-    <div className="w-full max-w-md mt-40 ">
-      {!submitted && !resultUrl && (
-        <UploadBox
-          onUpload={setImageUrl}
-          resultUrl={resultUrl}
-          isSubmitted={submitted}
-          isGenerating={isSubmitting}
-        />
-      )}
-    </div>
-    <div className="w-full max-w-md mt-44">
-      <StyleSelector
-        onChange={setSelection}
-        imageUrl={imageUrl}
-        setSubmitted={setSubmitted}
-        setResultUrl={setResultUrl}
-        resultUrl={resultUrl}
-        onChangeImage={setImageUrl}
-        isSubmitting = {isSubmitting}
-        setIsSubmitting = {setIsSubmitting}
+      <main className="flex-1">
+        {!mode && <ChoicePage setMode={setMode} />}
+        
+        {mode === 'design' && (
+          <div className="flex justify-center items-center gap-24 max-w-6xl mx-auto px-4 w-full">
+            <div className="w-full max-w-md mt-40">
+              {!submitted && !resultUrl && (
+                <UploadBox
+                  onUpload={setImageUrl}
+                  resultUrl={resultUrl}
+                  isSubmitted={submitted}
+                  isGenerating={isSubmitting}
+                />
+              )}
+            </div>
+            <div className="w-full max-w-md mt-44">
+              <StyleSelector
+                onChange={setSelection}
+                imageUrl={imageUrl}
+                setSubmitted={setSubmitted}
+                setResultUrl={setResultUrl}
+                resultUrl={resultUrl}
+                onChangeImage={setImageUrl}
+                isSubmitting={isSubmitting}
+                setIsSubmitting={setIsSubmitting}
+              />
+            </div>
+          </div>
+        )}
+      </main>
 
-      />
+      <Footer />
     </div>
-  </div>
-)}
-</div>
-    </>
   );
 }

@@ -5,7 +5,7 @@ import axios from "axios"
 import { Spinner } from "../ui/Spinner"
 import { X } from "lucide-react"
 import { AnimatePresence, motion } from "framer-motion"
-import { compressImage } from "@/ulits/compress"
+import { compressImage } from "@/utils/compress"
 
 const CLOUDINARY_UPLOAD_PRESET = "matchmate_example"
 const CLOUDINARY_CLOUD_NAME = "da0wbsjhp"
