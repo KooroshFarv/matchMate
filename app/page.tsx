@@ -6,6 +6,7 @@ import StyleSelector from "./components/upload/StyleSelector";
 import { useState } from "react";
 import ChoicePage from "./components/Choice";
 import Footer from "./components/Footer";
+import TestimonialPage from "./components/Testimonial";
 
 export default function Home() {
   const [selection, setSelection] = useState({
@@ -20,7 +21,7 @@ export default function Home() {
   const [resultUrl , setResultUrl] = useState<string | null>(null)
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#034C53]">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       
       <main className="flex-1">
@@ -53,6 +54,10 @@ export default function Home() {
           </div>
         )}
       </main>
+      <div className="mt-10">
+
+      <TestimonialPage />
+      </div>
 
       <Footer />
     </div>
