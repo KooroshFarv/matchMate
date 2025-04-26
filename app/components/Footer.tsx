@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa'
 
 const Footer = () => {
@@ -15,15 +16,16 @@ const Footer = () => {
 
         {/* Right side: Socials */}
         <div className="flex gap-6">
-          <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-[#DCD7C9] hover:text-[#DCD7C9]/70 transition">
+          <Link href="https://github.com/https://github.com/KooroshFarv" target="_blank" rel="noopener noreferrer" className="text-[#DCD7C9] hover:text-[#DCD7C9]/70 transition">
             <FaGithub size={24} />
-          </a>
-          <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-[#DCD7C9] hover:text-[#DCD7C9]/70 transition">
+          </Link>
+          <Link href="https://instagram.com/originalmedic" target="_blank" rel="noopener noreferrer" className="text-[#DCD7C9] hover:text-[#DCD7C9]/70 transition">
             <FaInstagram size={24} />
-          </a>
-          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="text-[#DCD7C9] hover:text-[#DCD7C9]/70 transition">
+          </Link>
+          <Link href="https://linkedin.com/in/www.linkedin.com/in/koorosh-farvardin" 
+          target="_blank" rel="noopener noreferrer" className="text-[#DCD7C9] hover:text-[#DCD7C9]/70 transition">
             <FaLinkedin size={24} />
-          </a>
+          </Link>
         </div>
       </div>
 
