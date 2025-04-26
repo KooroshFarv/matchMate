@@ -16,13 +16,13 @@ const Footer = () => {
 
         {/* Right side: Socials */}
         <div className="flex gap-6">
-          <Link href="https://github.com/https://github.com/KooroshFarv" target="_blank" rel="noopener noreferrer" className="text-[#DCD7C9] hover:text-[#DCD7C9]/70 transition">
+          <Link href="https://github.com/KooroshFarv" target="_blank" rel="noopener noreferrer" className="text-[#DCD7C9] hover:text-[#DCD7C9]/70 transition">
             <FaGithub size={24} />
           </Link>
           <Link href="https://instagram.com/originalmedic" target="_blank" rel="noopener noreferrer" className="text-[#DCD7C9] hover:text-[#DCD7C9]/70 transition">
             <FaInstagram size={24} />
           </Link>
-          <Link href="https://linkedin.com/in/www.linkedin.com/in/koorosh-farvardin" 
+          <Link href="https:www.linkedin.com/in/koorosh-farvardin" 
           target="_blank" rel="noopener noreferrer" className="text-[#DCD7C9] hover:text-[#DCD7C9]/70 transition">
             <FaLinkedin size={24} />
           </Link>
