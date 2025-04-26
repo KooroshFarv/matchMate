@@ -9,7 +9,7 @@ import {
 
 const Navbar = () => {
     return ( 
-       <nav className="flex justify-between shadow-sm items-center p-4 ">
+       <nav className="flex justify-between shadow-sm items-center p-4  ">
         <h1>MatchMade</h1>
         <div className="flex gap-10 justify-center">
             <DropdownMenu>

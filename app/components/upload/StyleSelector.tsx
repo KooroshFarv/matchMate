@@ -12,7 +12,7 @@ import { Button } from "../ui/button"
 import { toast } from "react-toastify"
 import { motion } from "framer-motion"
 import axios from "axios"
-import { X } from "lucide-react"
+import { Ghost, X } from "lucide-react"
 
 type Props = {
   onChange: (data: { style: string; room: string; vibe: string }) => void
@@ -91,36 +91,39 @@ const StyleSelector = ({
   }
 
   return (
-    <div className="w-full max-w-md mt-64 ml-10 space-y-4">
-      {/* Style */}
-      <div>
-        <label className="mb-1 block">Style</label>
-        <Select onValueChange={(value) => handleUpdates("style", value)}>
-          <SelectTrigger
-          disabled = {isSubmitting}
-          className="w-full h-12 rounded-md border border-gray-300 px-4 text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-black">
-            <SelectValue placeholder="Choose a style" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="minimalist">Minimalist</SelectItem>
-            <SelectItem value="modern">Modern</SelectItem>
-            <SelectItem value="scandinavian">Scandinavian</SelectItem>
-            <SelectItem value="industrial">Industrial</SelectItem>
-            <SelectItem value="cozy">Cozy</SelectItem>
-            <SelectItem value="boho">Boho</SelectItem>
-            <SelectItem value="japandi">Japandi</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+<div className="w-full max-w-md mt-64 ml-10 space-y-4">
+  {/* Style */}
+  <div>
+    <label className="mb-1 block text-white">Style</label>
+    <Select onValueChange={(value) => handleUpdates("style", value)}>
+      <SelectTrigger
+        disabled={isSubmitting}
+        className="w-full h-12 rounded-md bg-[#4C7B8B] text-white px-4 text-lg text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-white data-[placeholder]:text-white data-[placeholder]:opacity-100"
+        >
+        <SelectValue placeholder="Choose a style" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="minimalist">Minimalist</SelectItem>
+        <SelectItem value="modern">Modern</SelectItem>
+        <SelectItem value="scandinavian">Scandinavian</SelectItem>
+        <SelectItem value="industrial">Industrial</SelectItem>
+        <SelectItem value="cozy">Cozy</SelectItem>
+        <SelectItem value="boho">Boho</SelectItem>
+        <SelectItem value="japandi">Japandi</SelectItem>
+      </SelectContent>
+    </Select>
+  </div>
+
+
 
       {/* Room */}
       <div>
-        <label className="mb-1 block">Room</label>
+        <label className="mb-1 block text-white">Room</label>
         <Select onValueChange={(value) => handleUpdates("room", value)}>
           <SelectTrigger 
           disabled = {isSubmitting}
-          className="w-full h-12 rounded-md border border-gray-300 px-4 text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-black">
-            <SelectValue placeholder="Choose a room" />
+          className="w-full h-12 rounded-md bg-[#4C7B8B] text-white px-4 text-lg text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-white data-[placeholder]:text-white data-[placeholder]:opacity-100">
+          <SelectValue placeholder="Choose a room" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="living">Living Room</SelectItem>
@@ -134,12 +137,12 @@ const StyleSelector = ({
 
       {/* Vibe */}
       <div>
-        <label className="mb-1 block">Vibe</label>
+        <label className="mb-1 block text-white">Vibe</label>
         <Select onValueChange={(value) => handleUpdates("vibe", value)}>
           <SelectTrigger
           disabled = {isSubmitting}
-          className="w-full h-12 rounded-md border border-gray-300 px-4 text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-black">
-            <SelectValue placeholder="Choose a vibe" />
+          className="w-full h-12 rounded-md bg-[#4C7B8B] text-white px-4 text-lg text-left shadow-sm focus:outline-none focus:ring-2 focus:ring-white data-[placeholder]:text-white data-[placeholder]:opacity-100">
+          <SelectValue placeholder="Choose a vibe" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="natural">Natural</SelectItem>
@@ -158,9 +161,9 @@ const StyleSelector = ({
         onClick={handleSubmit}
         className={`mt-10 py-3 rounded-md transition ${
           isReady
-            ? "bg-black w-32 text-white hover:scale-105 cursor-pointer"
-            : "bg-gray-200 w-32 text-gray-500 cursor-not-allowed"
-        }`}
+          ? "bg-[#4C7B8B] w-32 text-white hover:scale-105 cursor-pointer hover:bg-[#4C7B8B] transition-colors duration-300"
+          : "bg-gray-200 w-32 text-gray-500 cursor-not-allowed hover:bg-[#4C7B8B] transition-colors duration-300"
+          }`}
       >
           {isSubmitting && (
       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
@@ -176,7 +179,7 @@ const StyleSelector = ({
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mt-10 p-6 border border-gray-200 rounded-lg absolute left-24 bottom-20 shadow-md"
+          className="mt-10 p-6  border-gray-200 rounded-xl absolute left-44 bottom-20 bg-[#D9EAFD] shadow-2xl"
         >
 
         {isSubmitting && (
@@ -217,10 +220,11 @@ const StyleSelector = ({
             setAfter(true)
             onChange({ style: "", room: "", vibe: "" })
           }}
-          className="absolute top-0 right-0 text-gray-600 rounded-full p-1 hover:scale-105
-           hover:text-gray-800 cursor-pointer transition"
+          className="absolute top-4 right-2 text-black rounded-full p-1 hover:scale-105
+           hover:text-gray-600 cursor-pointer transition"
         >
           <X />
+
         </button>
 )}
 

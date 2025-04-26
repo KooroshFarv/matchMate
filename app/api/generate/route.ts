@@ -18,7 +18,7 @@ export async function POST(req: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        version: "76604baddc85b1b4616e1c6475eca080da339c8875bd4996705440484a6eac38",
+          version: "30c1d0b916a6f8efce20493f5d61ee27491ab2a60437c13c588468b9810ec23f",
           input: {
           image: imageUrl,
          prompt : `A ${vibe.toLowerCase()} ${style.toLowerCase()} ${room.toLowerCase()}`
@@ -26,7 +26,11 @@ export async function POST(req: Request) {
       }),
     })
 
+    // const replicateData = await replicateResponse.json()
+    console.log("Replicate response status:", replicateResponse.status)
     const replicateData = await replicateResponse.json()
+    console.log("Replicate response data:", replicateData)
+
    
 
     if (replicateData.error) {

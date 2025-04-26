@@ -72,10 +72,9 @@ const UploadBox = ({ onUpload, resultUrl, isSubmitted, isGenerating }: UploadBox
 
   return (
     <div
-      className={`relative w-[500px] h-[500px] 
-        rounded-lg overflow-hidden mt-20
-        flex items-center justify-center text-center text-gray-500 cursor-pointer
-        ${displayUrl || (isSubmitted && resultUrl) ? 'border-none' : 'border-2 border-dashed border-gray-300'}
+      className={`relative w-[500px] h-[500px] rounded-lg overflow-hidden mt-20 flex items-center justify-center text-center text-white
+         bg-gray-800 cursor-pointer ${displayUrl || (isSubmitted && resultUrl) ?
+          'bg-transparent border-none' : 'border-2 border-dashed border-gray-300'}
       `}
       onDragOver={(e) => e.preventDefault()}
       onDrop={!isLocked && !loading && !isGenerating ? handleDrop : undefined}
@@ -112,7 +111,7 @@ const UploadBox = ({ onUpload, resultUrl, isSubmitted, isGenerating }: UploadBox
                   setPreviewUrl(null)
                   onUpload("")
                 }}
-                className="absolute top-2 right-2 text-gray-600 rounded-full p-1 hover:scale-105 hover:text-gray-800 cursor-pointer transition"
+                className="absolute top-0 right-0 text-white rounded-full p-1 hover:scale-105 hover:text-gray-800 cursor-pointer transition"
               >
                 <X />
               </button>

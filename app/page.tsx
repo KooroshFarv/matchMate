@@ -20,12 +20,16 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      <div className="min-h-screen bg-[#23486A]">
+
+     
       {/* {!mode && <ChoicePage setMode={setMode}  setResultUrl={setResultUrl} resultUrl={resultUrl}/>} */}
       {!mode && <ChoicePage setMode={setMode}/>}
       
       {mode === 'design' && (
-  <div className="flex justify-center items-start gap-32 max-w-6xl mx-auto px-4 w-full">
-    <div className="w-full max-w-md mt-40">
+  <div className="flex justify-center items-center gap-24 max-w-6xl mx-auto px-4 w-full">
+    
+    <div className="w-full max-w-md mt-40 ">
       {!submitted && !resultUrl && (
         <UploadBox
           onUpload={setImageUrl}
@@ -35,7 +39,7 @@ export default function Home() {
         />
       )}
     </div>
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-md mt-44">
       <StyleSelector
         onChange={setSelection}
         imageUrl={imageUrl}
@@ -50,7 +54,7 @@ export default function Home() {
     </div>
   </div>
 )}
-
+</div>
     </>
   );
 }
