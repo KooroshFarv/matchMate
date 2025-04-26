@@ -5,6 +5,7 @@ import axios from "axios"
 import { Spinner } from "../ui/Spinner"
 import { X } from "lucide-react"
 import { AnimatePresence, motion } from "framer-motion"
+import { compressImage } from "@/ulits/compress"
 
 const CLOUDINARY_UPLOAD_PRESET = "matchmate_example"
 const CLOUDINARY_CLOUD_NAME = "da0wbsjhp"
@@ -16,6 +17,9 @@ type UploadBoxProps = {
   isGenerating? : boolean 
 }
 
+
+
+
 const UploadBox = ({ onUpload, resultUrl, isSubmitted, isGenerating }: UploadBoxProps) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
@@ -25,24 +29,29 @@ const UploadBox = ({ onUpload, resultUrl, isSubmitted, isGenerating }: UploadBox
   const isLocked = isSubmitted && !!resultUrl
 
   const handleUpload = async (file: File) => {
-    const formData = new FormData()
-    formData.append('file', file)
-    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET)
-
+    setLoading(true);
+  
     try {
-      setLoading(true)
+      const compressed = await compressImage(file); 
+      const formData = new FormData();
+      formData.append('file', compressed);
+      formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+  
       const res = await axios.post(
         `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
         formData
-      )
-      setPreviewUrl(res.data.secure_url)
-      onUpload(res.data.secure_url)
+      );
+  
+      setPreviewUrl(res.data.secure_url);
+      onUpload(res.data.secure_url);
     } catch (error) {
-      console.error("Upload failed:", error)
+      console.error("Upload failed:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
+
+
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault()
