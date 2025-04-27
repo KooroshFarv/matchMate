@@ -7,6 +7,7 @@ import { useState } from "react";
 import ChoicePage from "./components/Choice";
 import Footer from "./components/Footer";
 import TestimonialPage from "./components/Testimonial";
+import FAQPage from "./components/Faq";
 
 export default function Home() {
   const [selection, setSelection] = useState({
@@ -55,6 +56,8 @@ export default function Home() {
         )}
       </main>
       <div className="mt-16">
+
+        <FAQPage />
 
       <TestimonialPage />
       </div>

@@ -16,7 +16,7 @@ const ChoicePage = ({ setMode }: ChoicePageProps) => {
       transition={{ duration: 0.5 }}
       className="flex flex-col items-center justify-center min-h-screen text-center space-y-6"
     >
-      <h1 className="text-3xl font-semibold text-white">What do you want to do today?</h1>
+      <h1 className="text-3xl font-semibold text-black">What do you want to do today?</h1>
       <div className="flex gap-4">
         <Button className="cursor-pointer" onClick={() => setMode('design')}>Style my room</Button>
         <Button className="cursor-pointer" onClick={() => setMode('match')}>Match this item</Button>
