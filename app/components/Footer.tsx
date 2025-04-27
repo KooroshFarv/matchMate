@@ -22,7 +22,7 @@ const Footer = () => {
           <Link href="https://instagram.com/originalmedic" target="_blank" rel="noopener noreferrer" className="text-[#DCD7C9] hover:text-[#DCD7C9]/70 transition">
             <FaInstagram size={24} />
           </Link>
-          <Link href="https:www.linkedin.com/in/koorosh-farvardin" 
+          <Link href="https://www.linkedin.com/in/koorosh-farvardin" 
           target="_blank" rel="noopener noreferrer" className="text-[#DCD7C9] hover:text-[#DCD7C9]/70 transition">
             <FaLinkedin size={24} />
           </Link>

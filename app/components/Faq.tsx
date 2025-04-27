@@ -32,11 +32,11 @@ const FAQPage = () => {
     return ( 
 
              <section className="w-full py-20  text-[#DCD7C9]">
-             <div className="max-w-4xl mx-auto px-6">
-             <h2 className="text-3xl text-left mb-10">FAQ</h2>
+             <div className="max-w-7xl mx-auto px-6">
+             <h2 className="text-3xl text-left text-black mb-10">FAQ</h2>
              <div className="space-y-4">
                 {faq.map((item, index) => (
-                    <div key={index} className="bg-[#1B2E45] rounded-xl p-6 cursor-pointer shadow-md hover:shadow-lg transition-all"
+                    <div key={index} className="bg-[#011112c2] rounded-xl p-6 cursor-pointer shadow-md hover:shadow-lg transition-all"
                     onClick={() => toggle(index)}
                     >
                         <h3 className="text-xl font-semibold flex justify-between items-center">
