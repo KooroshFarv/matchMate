@@ -12,7 +12,7 @@ import { Button } from "../ui/button"
 import { toast } from "react-toastify"
 import { motion } from "framer-motion"
 import axios from "axios"
-import { Ghost, X } from "lucide-react"
+import { X } from "lucide-react"
 
 type Props = {
   onChange: (data: { style: string; room: string; vibe: string }) => void

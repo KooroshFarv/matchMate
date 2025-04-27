@@ -13,7 +13,7 @@ type ContactFormData = z.infer<typeof ContactForm>
 
 const ContactPage = () => {
     const { register, handleSubmit, formState : {errors}, reset} = useForm<ContactFormData>({resolver : zodResolver(ContactForm)})
-    const submit = (data : ContactFormData) => {
+    const submit = () => {
         alert('Message Sent !')
         reset()
     }

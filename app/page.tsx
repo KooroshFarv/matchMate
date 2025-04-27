@@ -11,7 +11,7 @@ import FAQPage from "./components/Faq";
 import ContactPage from "./components/Contact";
 
 export default function Home() {
-  const [selection, setSelection] = useState({
+  const [, setSelection] = useState({
     style: '',
     room: '',
     vibe: ''
