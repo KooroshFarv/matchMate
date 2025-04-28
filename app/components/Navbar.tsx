@@ -17,7 +17,7 @@ const Navbar = () => {
          </h1>
 
       <div className="flex gap-10 justify-center items-center">
-        <DropdownMenu>
+        {/* <DropdownMenu>
           <DropdownMenuTrigger className="cursor-pointer font-medium hover:text-[#DCD7C9]/80 transition">
             Concepts
           </DropdownMenuTrigger> 
@@ -27,13 +27,14 @@ const Navbar = () => {
             <DropdownMenuItem>Cozy</DropdownMenuItem>
             <DropdownMenuItem>Industrial</DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
 
         <div className="cursor-pointer font-medium hover:text-[#DCD7C9]/80 transition">Inspiration</div>
+        <div className="cursor-pointer font-medium hover:text-[#DCD7C9]/80 transition">Match Item</div>
         <div className="cursor-pointer font-medium hover:text-[#DCD7C9]/80 transition">Contact</div>
       </div>
 
-      <Button variant="ghost" className="text-[#DCD7C9] hover:bg-[#3F4F44]/40 transition">
+      <Button className="text-[#DCD7C9] cursor-pointer hover:bg-black transition">
         Sign In
       </Button>
     </nav>
