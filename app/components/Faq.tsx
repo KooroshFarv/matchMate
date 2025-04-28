@@ -31,7 +31,7 @@ const FAQPage = () => {
 
     return ( 
 
-             <section className="w-full py-20  text-[#DCD7C9]">
+             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-20  text-[#DCD7C9]">
              <div className="max-w-7xl mx-auto px-6">
              <h2 className="text-3xl text-left text-black mb-10">FAQ</h2>
              <div className="space-y-4">

@@ -6,7 +6,7 @@ import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa'
 const Footer = () => {
   return (
     <footer className="w-full bg-[#011112c2] py-10 mt-10">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 gap-6">
+    <div className="flex flex-col md:flex-row justify-between items-center gap-4 px-6 py-8 bg-[#011112c2]">
         
         {/* Left side */}
         <div className="text-center md:text-left">

@@ -14,7 +14,7 @@ export default function DesignPage() {
   return (
     <>
         <Navbar />
-    <div className="flex justify-center items-center gap-24 max-w-6xl mx-auto px-4 w-full min-h-screen">
+    <div className="flex flex-col md:flex-row md:gap-24 justify-center items-center gap-24 max-w-6xl mx-auto px-4 w-full min-h-screen">
       <div className="w-full max-w-md mt-20">
         {!submitted && !resultUrl && (
           <UploadBox

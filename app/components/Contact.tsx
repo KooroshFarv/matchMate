@@ -20,8 +20,8 @@ const ContactPage = () => {
     return ( 
         <>
         <section className="w-full py-20">
-        <div className="max-w-2xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-center mb-10">Get In Touch</h2>
+        <div className="max-w-full md:max-w-2xl mx-auto px-6">
+        <h2 className="text-3xl font-bold text-center mb-10">Get In Touch</h2>
 
             <form onSubmit={handleSubmit(submit)} className="flex flex-col gap-5">
                 <input type="text" placeholder="Your Name .." {...register('name')}           
