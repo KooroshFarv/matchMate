@@ -3,6 +3,7 @@
 import UploadBox from "../components/upload/UploadBox";
 import StyleSelector from "../components/upload/StyleSelector";
 import { useState } from "react";
+import Navbar from "../components/Navbar";
 
 export default function DesignPage() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -11,8 +12,10 @@ export default function DesignPage() {
   const [resultUrl, setResultUrl] = useState<string | null>(null);
 
   return (
-    <div className="flex justify-center items-center gap-24 max-w-6xl mx-auto px-4 w-full min-h-screen bg-[#23486A]">
-      <div className="w-full max-w-md mt-40">
+    <>
+        <Navbar />
+    <div className="flex justify-center items-center gap-24 max-w-6xl mx-auto px-4 w-full min-h-screen">
+      <div className="w-full max-w-md mt-20">
         {!submitted && !resultUrl && (
           <UploadBox
             onUpload={setImageUrl}
@@ -22,7 +25,7 @@ export default function DesignPage() {
           />
         )}
       </div>
-      <div className="w-full max-w-md mt-44">
+      <div className="w-full max-w-md mt-20">
         <StyleSelector
           onChangeImage={setImageUrl}
           onChange={console.log} 
@@ -35,5 +38,6 @@ export default function DesignPage() {
         />
       </div>
     </div>
+    </>
   );
 }

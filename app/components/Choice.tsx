@@ -1,28 +1,29 @@
 'use client'
+import { useRouter } from "next/navigation";
 
-import { motion } from "framer-motion"
-import { Button } from "./ui/button"
+const ChoicePage = () => {
+  const router = useRouter();
 
-type ChoicePageProps = {
-  setMode: (value: 'design' | 'match') => void
-}
-
-const ChoicePage = ({ setMode }: ChoicePageProps) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.5 }}
-      className="flex flex-col items-center justify-center min-h-screen text-center space-y-6"
-    >
-      <h1 className="text-3xl font-semibold text-black">What do you want to do today?</h1>
+    <div className="flex flex-col items-center justify-center h-screen text-center">
+      <h2 className="text-3xl font-bold mb-6">What do you want to do today?</h2>
       <div className="flex gap-4">
-        <Button className="cursor-pointer" onClick={() => setMode('design')}>Style my room</Button>
-        <Button className="cursor-pointer" onClick={() => setMode('match')}>Match this item</Button>
+        <button
+          onClick={() => router.push('/design')}
+          className="bg-black text-white px-6 py-3 rounded-md hover:bg-gray-800 transition"
+        >
+          Style my Room
+        </button>
+        <button
+          onClick={() => router.push('/design')}
+          className="bg-black text-white px-6 py-3 rounded-md hover:bg-gray-800 transition"
+        >
+          Match this Item
+        </button>
       </div>
-    </motion.div>
-  )
-}
+    </div>
+  );
+};
 
-export default ChoicePage
+export default ChoicePage;
+

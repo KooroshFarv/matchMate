@@ -84,9 +84,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-1">
-        <ChoicePage setMode={function (value: "design" | "match"): void {
-          throw new Error("Function not implemented.");
-        } } /> 
+        <ChoicePage /> 
         <FAQPage />
         <ContactPage />
       </main>
