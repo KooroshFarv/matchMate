@@ -139,12 +139,16 @@ const UploadBox = ({ onUpload, resultUrl, isSubmitted, isGenerating }: UploadBox
 
       <input
         type="file"
+        id="photo-upload"
         accept="image/*"
         ref={inputRef}
+        capture="environment"
         className="hidden"
         onChange={handleChange}
       />
+   
     </div>
+    
   )
 }
 
