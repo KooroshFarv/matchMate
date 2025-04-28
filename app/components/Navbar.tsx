@@ -1,12 +1,6 @@
 'use client'
 
 import { Button } from "@/app/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/app/components/ui/dropdown-menu"
 import Link from "next/link"
 
 const Navbar = () => {
