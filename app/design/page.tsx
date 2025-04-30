@@ -14,8 +14,8 @@ export default function DesignPage() {
   return (
     <>
         <Navbar />
-    <div className="flex flex-col md:flex-row md:gap-24 justify-center items-center gap-24 max-w-6xl mx-auto px-4 w-full min-h-screen">
-      <div className="w-full max-w-md mt-20">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-24 mx-auto px-4 w-full min-h-screen pt-24">
+        <div className="w-full max-w-md">
         {!submitted && !resultUrl && (
           <UploadBox
             onUpload={setImageUrl}
@@ -25,8 +25,8 @@ export default function DesignPage() {
           />
         )}
       </div>
-      <div className="w-full max-w-md mt-20">
-        <StyleSelector
+      <div className="w-full max-w-md">
+      <StyleSelector
           onChangeImage={setImageUrl}
           onChange={console.log} 
           imageUrl={imageUrl}

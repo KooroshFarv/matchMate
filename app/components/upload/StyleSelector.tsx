@@ -91,7 +91,7 @@ const StyleSelector = ({
   }
 
   return (
-<div className="w-full max-w-md mt-64 ml-10 space-y-4">
+<div className="w-full max-w-md md:mt-64 md:ml-10 ">
   {/* Style */}
   <div>
     <label className="mb-1 block text-black">Style</label>
