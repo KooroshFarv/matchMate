@@ -18,10 +18,12 @@ export async function POST(req: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-          version: "30c1d0b916a6f8efce20493f5d61ee27491ab2a60437c13c588468b9810ec23f",
+          version: "5d8da4e5c98fea03dcfbe3ec89e40cf0f4a0074a8930fa02aa0ee2aaf98c3d11",
           input: {
           image: imageUrl,
-         prompt : `A ${vibe.toLowerCase()} ${style.toLowerCase()} ${room.toLowerCase()}`
+         prompt : `A ${vibe.toLowerCase()} ${style.toLowerCase()} ${room.toLowerCase()}`,
+         guidance_scale : 6,
+         num_inference_steps: 8,
         },
       }),
     })
@@ -45,7 +47,9 @@ export async function POST(req: Request) {
 
     let outputUrl = null
 
+
     while (!outputUrl) {
+      await new Promise((r) => setTimeout(r, 1000))
       const pollRes = await fetch(predictionUrl, {
         headers: {
           Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
@@ -55,13 +59,11 @@ export async function POST(req: Request) {
       const pollData = await pollRes.json()
 
       if (pollData.status === "succeeded") {
-        outputUrl = pollData.output
-        console.log("Final AI Output:", pollData.output)
+        outputUrl = pollData.output as string
       } else if (pollData.status === "failed") {
         return NextResponse.json({ error: "Generation failed" }, { status: 500 })
       }
 
-      await new Promise((res) => setTimeout(res, 1500))
     }
 
     return NextResponse.json({ resultUrl: outputUrl })
