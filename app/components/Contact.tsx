@@ -48,7 +48,7 @@ const ContactPage = () => {
                 <p className="text-sm text-red-400">{errors.email.message}</p>
                 )}
 
-                <Button type="submit" className="mt-6 bg-[#3F4F44] hover:bg-[#2C3930] text-[#DCD7C9] py-3 rounded-lg text-lg transition"
+                <Button type="submit" className="mt-6 bg-black hover:bg-[#2C3930] text-[#DCD7C9] py-3 rounded-lg text-lg transition"
                 >
                     Send Message
                 </Button>
