@@ -20,6 +20,11 @@ const faq = [
         question: "Will my uploaded photos be saved?",
         answer: "Nope! Your photos are processed securely and deleted automatically after a while.",
       },
+      {
+        question: "Can I use MatchMate on mobile devices?",
+        answer: "Yes, MatchMate is fully responsive and works smoothly on smartphones and tablets.",
+      }
+      
 ]
 
 
@@ -31,10 +36,12 @@ const FAQPage = () => {
 
     return ( 
 
-             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-20  text-[#DCD7C9]">
-             <div className="max-w-7xl mx-auto px-6">
+          <section className="w-full px-6 py-20 text-[#DCD7C9]">
+                  <div className="max-w-7xl mx-auto px-6">
+
              <h2 className="text-3xl text-left text-black mb-10">FAQ</h2>
-             <div className="space-y-4">
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
                 {faq.map((item, index) => (
                     <div key={index} className="bg-[#011112c2] rounded-xl p-6 cursor-pointer shadow-md hover:shadow-lg transition-all"
                     onClick={() => toggle(index)}
@@ -62,14 +69,9 @@ const FAQPage = () => {
 
                         </AnimatePresence>
                
-                     <div
-                     className={`mt-4 text-[#DCD7C9]/80 text-md overflow-hidden transition-all duration-300 ${
-                       openIndex === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
-                     }`}
-                   >
-                    </div>
                     </div>
                 ))}
+      
              </div>
                 </div>
                 </section>
