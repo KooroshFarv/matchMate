@@ -72,7 +72,7 @@ const UploadBox = ({ onUpload, resultUrl, isSubmitted, isGenerating }: UploadBox
 
   return (
     <div
-      className={`relative w-[500px] h-[500px] rounded-lg overflow-hidden mt-20 flex items-center justify-center text-center text-white
+      className={`relative w-full h-[500px] rounded-lg overflow-hidden mt-20 flex items-center justify-center text-center text-white
          bg-[#011112c2] cursor-pointer ${displayUrl || (isSubmitted && resultUrl) ?
           'bg-transparent border-none' : 'border-2 border-dashed border-gray-300'}
       `}
