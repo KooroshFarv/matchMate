@@ -48,6 +48,7 @@ export async function POST(req: Request) {
     let outputUrl = null
 
 
+    
     while (!outputUrl) {
       await new Promise((r) => setTimeout(r, 1000))
       const pollRes = await fetch(predictionUrl, {
@@ -56,6 +57,7 @@ export async function POST(req: Request) {
         },
       })
 
+      
       const pollData = await pollRes.json()
 
       if (pollData.status === "succeeded") {

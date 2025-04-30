@@ -162,14 +162,14 @@ const StyleSelector = ({
         className={`mt-10 py-3 rounded-md transition ${
           isReady
           ? "bg-[#4C7B8B] w-32 text-white hover:scale-105 cursor-pointer hover:bg-[#4C7B8B] transition-colors duration-300"
-          : "bg-gray-200 w-32 text-gray-500 cursor-not-allowed hover:bg-[#4C7B8B] transition-colors duration-300"
+          : "bg-gray-200 w-32 text-gray-500 cursor-not-allowed hover:bg-[#4C7B8B] transition-colors duration-300 sm:mb-5"
           }`}
       >
           {isSubmitting && (
       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
     )}
 
-        {isSubmitting ? "Generating .." : Submitted ? "Generate Again" : "Submitted"}
+        {isSubmitting ? "Generating .." : Submitted ? "Generate Again" : "Submit"}
       </Button>
 
       {/* Result Preview */}
