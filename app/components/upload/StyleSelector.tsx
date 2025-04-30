@@ -159,10 +159,10 @@ const StyleSelector = ({
       <Button
         disabled={isSubmitting}
         onClick={handleSubmit}
-        className={`mt-10 py-3 rounded-md transition ${
+        className={`mt-10 py-3 rounded-md transition mb-8 ${
           isReady
           ? "bg-[#4C7B8B] w-32 text-white hover:scale-105 cursor-pointer hover:bg-[#4C7B8B] transition-colors duration-300"
-          : "bg-gray-200 w-32 text-gray-500 cursor-not-allowed hover:bg-[#4C7B8B] transition-colors duration-300 sm:mb-5"
+          : "bg-gray-200 w-32 text-gray-500 cursor-not-allowed hover:bg-[#4C7B8B] transition-colors duration-300 "
           }`}
       >
           {isSubmitting && (
