@@ -72,10 +72,17 @@ const UploadBox = ({ onUpload, resultUrl, isSubmitted, isGenerating }: UploadBox
 
   return (
     <div
-      className={`relative w-full h-[500px] rounded-lg overflow-hidden mt-20 flex items-center justify-center text-center text-white
-         bg-[#011112c2] cursor-pointer ${displayUrl || (isSubmitted && resultUrl) ?
-          'bg-transparent border-none' : 'border-2 border-dashed border-gray-300'}
-      `}
+    className={`relative
+      w-full sm:w-[350px] md:w-[400px] lg:w-[500px]
+      aspect-square
+      rounded-lg overflow-hidden mt-20 flex items-center
+      justify-center text-center text-white
+      bg-[#011112c2] cursor-pointer
+      ${displayUrl || (isSubmitted && resultUrl)
+        ? 'bg-transparent border-none'
+       : 'border-2 border-dashed border-gray-300'} `}
+
+       
       onDragOver={(e) => e.preventDefault()}
       onDrop={!isLocked && !loading && !isGenerating ? handleDrop : undefined}
       onClick={() => {

@@ -29,7 +29,6 @@ export async function POST(req: Request) {
     })
 
     // const replicateData = await replicateResponse.json()
-    console.log("Replicate response status:", replicateResponse.status)
     const replicateData = await replicateResponse.json()
     console.log("Replicate response data:", replicateData)
 
@@ -61,10 +60,20 @@ export async function POST(req: Request) {
       const pollData = await pollRes.json()
 
       if (pollData.status === "succeeded") {
+        
         outputUrl = pollData.output as string
+        const created = new Date(pollData.created_at).getTime()
+        const started = new Date(pollData.started).getTime()
+        const completed = new Date(pollData.completed_at).getTime()
+
+        console.log((started - created / 1000))
+        console.log((completed - started / 1000))
+        console.log((completed - created / 1000))
       } else if (pollData.status === "failed") {
         return NextResponse.json({ error: "Generation failed" }, { status: 500 })
       }
+      console.log(pollData)
+
 
     }
 
