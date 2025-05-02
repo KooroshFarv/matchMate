@@ -16,7 +16,7 @@ const Navbar = () => {
       </Link>
 
       <div className="hidden md:flex flex-1 justify-center gap-10">
-        <Link href="#" className="hover:text-[#DCD7C9]/80 transition">
+        <Link href='/inspiration' className="hover:text-[#DCD7C9]/80 transition">
           Inspiration
         </Link>
         <Link href="#" className="hover:text-[#DCD7C9]/80 transition">
