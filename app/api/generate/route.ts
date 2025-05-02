@@ -45,11 +45,16 @@ export async function POST(req: Request) {
     }
 
     let outputUrl = null
+    let attempt = 0
+    const maxAttempt = 60
+
 
 
     
-    while (!outputUrl) {
+    while (!outputUrl && attempt < maxAttempt) {
+      attempt++ 
       await new Promise((r) => setTimeout(r, 1000))
+
       const pollRes = await fetch(predictionUrl, {
         headers: {
           Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
@@ -66,15 +71,19 @@ export async function POST(req: Request) {
         const started = new Date(pollData.started).getTime()
         const completed = new Date(pollData.completed_at).getTime()
 
-        console.log((started - created / 1000))
-        console.log((completed - started / 1000))
-        console.log((completed - created / 1000))
+        console.log((started - created) / 1000)
+        console.log((completed - started) / 1000)
+        console.log((completed - created) / 1000)
       } else if (pollData.status === "failed") {
         return NextResponse.json({ error: "Generation failed" }, { status: 500 })
       }
       console.log(pollData)
+     
 
 
+    }
+    if(!outputUrl){
+      return NextResponse.json({error : "Generation timed out"}, {status : 504})
     }
 
     return NextResponse.json({ resultUrl: outputUrl })
