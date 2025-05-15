@@ -14,10 +14,21 @@ type ContactFormData = z.infer<typeof ContactForm>
 
 const ContactPage = () => {
     const { register, handleSubmit, formState : {errors}, reset} = useForm<ContactFormData>({resolver : zodResolver(ContactForm)})
-    const submit = (data : ContactFormData) => {
-        console.log(data)
-        alert('Message Sent !')
-        reset()
+    const submit = async(data : ContactFormData) => {
+        const res = await fetch('/api/contact', {
+            method : 'POST',
+            headers : {'Content-Type' : 'application/json'},
+            body: JSON.stringify(data),
+        })
+
+        const result = await res.json()
+        console.log(result)
+        if(res.ok) {
+            alert('Message Sent !')
+            reset()
+        }else {
+            alert('Failed to send message')
+        }
     }
     return ( 
         <>
