@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
-
+import { type Metadata } from 'next'
+import { ClerkProvider } from "@clerk/nextjs";
 
 
 const geistSans = Geist({
@@ -27,12 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
-
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -42,8 +41,9 @@ export default function RootLayout({
         pauseOnHover
         draggable
         theme="light"
-      />
+        />
       </body>
     </html>
+        </ClerkProvider>
   );
 }
