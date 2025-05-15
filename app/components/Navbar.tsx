@@ -63,7 +63,7 @@ const Navbar = () => {
         </button>
 
         <div className="flex flex-col gap-6">
-          <Link href="#" onClick={() => setOpen(false)} className="text-lg hover:text-[#DCD7C9]/80 transition">
+          <Link href="/inspiration" onClick={() => setOpen(false)} className="text-lg hover:text-[#DCD7C9]/80 transition">
             Inspiration
           </Link>
           <Link href="#" onClick={() => setOpen(false)} className="text-lg hover:text-[#DCD7C9]/80 transition">
