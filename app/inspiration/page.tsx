@@ -4,6 +4,8 @@ import Masonry from 'react-masonry-css'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useState } from "react";
 import Image from "next/image";
+import { Button } from "../components/ui/button";
+import Link from "next/link";
 
 const breakPoint = {
     default : 3,
@@ -11,7 +13,7 @@ const breakPoint = {
     700 : 2,
 }
 
-const batchSize = 2
+const batchSize = 4
 
 
 const InspirationPage = () => {
@@ -37,12 +39,12 @@ const InspirationPage = () => {
     
 
     return ( 
-        <div className="px-4 py-10 min-h-screen">
+        <div className="px-4 py-10 min-h-screen relative">
             <InfiniteScroll 
             dataLength={visible.length}
             next={fetchMore}
             hasMore={true}
-            loader={<p className="text-center text-gray-800 my-4"> Loading </p>}
+            loader={<p className="text-center text-gray-800 my-4"> Loading ..</p>}
             scrollThreshold={0.9}
             >
             < Masonry breakpointCols={breakPoint}
@@ -61,7 +63,16 @@ const InspirationPage = () => {
             </Masonry>
 
             </InfiniteScroll>
+
+            <Button asChild   
+            className="bg-black text-white fixed bottom-4 left-1/2 -translate-x-1/2 shadow-3xl rounded-3xl cursor-pointer px-6 py-2 z-50 text-sm sm:text-base"
+            >
+              <Link href='/'>
+              Back Home
+              </Link>
+            </Button>
         </div>
+
  
      );
 }
