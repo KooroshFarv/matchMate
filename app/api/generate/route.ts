@@ -5,11 +5,21 @@ export async function POST(req: Request) {
     const body = await req.json()
     const { imageUrl, style, room, vibe } = body
 
-    console.log("Incoming POST body:", { imageUrl, style, room, vibe })
+    // --- Safely convert Cloudinary image to RGB JPEG and limit size ---
+    const safeImageUrl = imageUrl.includes("/upload/")
+      ? imageUrl.replace("/upload/", "/upload/f_jpg,w_800,h_800,c_limit/")
+      : imageUrl
 
-    if(!room || !style || !vibe || !imageUrl){
-        return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    console.log("Incoming POST body:", { safeImageUrl, style, room, vibe })
+
+    if (!room || !style || !vibe || !imageUrl) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      )
     }
+
+    console.log("Replicate token loaded:", !!process.env.REPLICATE_API_TOKEN)
 
     const replicateResponse = await fetch("https://api.replicate.com/v1/predictions", {
       method: "POST",
@@ -18,42 +28,41 @@ export async function POST(req: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-          version: "5d8da4e5c98fea03dcfbe3ec89e40cf0f4a0074a8930fa02aa0ee2aaf98c3d11",
-          input: {
-          image: imageUrl,
-         prompt : `A ${vibe.toLowerCase()} ${style.toLowerCase()} ${room.toLowerCase()}`,
-         guidance_scale : 6,
-         num_inference_steps: 8,
+        version: "76604baddc85b1b4616e1c6475eca080da339c8875bd4996705440484a6eac38",
+        input: {
+          image: safeImageUrl,
+          prompt: `A ${vibe.toLowerCase()} ${style.toLowerCase()} ${room.toLowerCase()}`,
+          guidance_scale: 6,
+          num_inference_steps: 10,
         },
       }),
     })
 
-    // const replicateData = await replicateResponse.json()
+    if (!replicateResponse.ok) {
+      const errText = await replicateResponse.text()
+      console.error("Replicate API Error:", errText)
+      return NextResponse.json(
+        { error: "Failed to call Replicate API", details: errText },
+        { status: 500 }
+      )
+    }
+
     const replicateData = await replicateResponse.json()
-    console.log("Replicate response data:", replicateData)
-
-   
-
-    if (replicateData.error) {
-      console.error("Replicate Error:", replicateData.error)
-      return NextResponse.json({ error: replicateData.error }, { status: 500 })
-    }
-
     const predictionUrl = replicateData?.urls?.get
+
     if (!predictionUrl) {
-      return NextResponse.json({ error: "Prediction URL not found" }, { status: 500 })
+      return NextResponse.json(
+        { error: "Prediction URL not found" },
+        { status: 500 }
+      )
     }
 
-    let outputUrl = null
-    let attempt = 0
-    const maxAttempt = 60
+    console.log("🌀 Polling started for:", predictionUrl)
 
-
-
-    
-    while (!outputUrl && attempt < maxAttempt) {
-      attempt++ 
-      await new Promise((r) => setTimeout(r, 1000))
+    // --- Poll until image generation completes ---
+    let outputUrl: string | null = null
+    for (let attempt = 0; attempt < 60; attempt++) {
+      await new Promise((r) => setTimeout(r, 2000)) // wait 2s between polls
 
       const pollRes = await fetch(predictionUrl, {
         headers: {
@@ -61,34 +70,45 @@ export async function POST(req: Request) {
         },
       })
 
-      
+      if (!pollRes.ok) continue
       const pollData = await pollRes.json()
+      console.log(`Polling [${attempt}] → ${pollData.status}`)
 
       if (pollData.status === "succeeded") {
-        
-        outputUrl = pollData.output as string
-        const created = new Date(pollData.created_at).getTime()
-        const started = new Date(pollData.started).getTime()
-        const completed = new Date(pollData.completed_at).getTime()
-
-        console.log((started - created) / 1000)
-        console.log((completed - started) / 1000)
-        console.log((completed - created) / 1000)
-      } else if (pollData.status === "failed") {
-        return NextResponse.json({ error: "Generation failed" }, { status: 500 })
+        outputUrl = Array.isArray(pollData.output)
+          ? pollData.output[0]
+          : pollData.output
+        break
       }
-      console.log(pollData)
-     
 
-
+      if (pollData.status === "failed") {
+        console.error("Generation failed:", pollData.error)
+        return NextResponse.json(
+          { error: pollData.error || "Generation failed" },
+          { status: 500 }
+        )
+      }
     }
-    if(!outputUrl){
-      return NextResponse.json({error : "Generation timed out"}, {status : 504})
+
+    if (!outputUrl) {
+      console.error("❌ Timed out waiting for output")
+      return NextResponse.json(
+        { error: "Generation timed out after 120s" },
+        { status: 504 }
+      )
     }
 
+    console.log("✅ Generation succeeded:", outputUrl)
     return NextResponse.json({ resultUrl: outputUrl })
-  } catch (error) {
-    console.error("API Error:", error)
-    return NextResponse.json({ error: "Something went wrong" }, { status: 500 })
+  } catch (error: unknown) {
+    console.error("❌ API Error:", error)
+    return NextResponse.json(
+      {
+        error: "Something went wrong",
+        details:
+          error instanceof Error ? error.message : JSON.stringify(error),
+      },
+      { status: 500 }
+    )
   }
 }
